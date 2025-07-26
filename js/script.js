@@ -52,7 +52,8 @@ form.addEventListener("submit", function (e) {
   renderContacts();
   form.reset();
 
-  // Tampilkan pesan sukses
+  // Notifikasi berhasil disimpan
+  successMessage.textContent = "Kontak berhasil disimpan!";
   successMessage.classList.remove("hidden");
   setTimeout(() => {
     successMessage.classList.add("hidden");
@@ -61,11 +62,19 @@ form.addEventListener("submit", function (e) {
 
 list.addEventListener("click", function (e) {
   const index = e.target.dataset.index;
+
   if (e.target.classList.contains("delete-btn")) {
     if (confirm("Yakin ingin menghapus kontak ini?")) {
       contacts.splice(index, 1);
       localStorage.setItem("contacts", JSON.stringify(contacts));
       renderContacts();
+
+      // Notifikasi berhasil dihapus
+      successMessage.textContent = "Kontak berhasil dihapus!";
+      successMessage.classList.remove("hidden");
+      setTimeout(() => {
+        successMessage.classList.add("hidden");
+      }, 2000);
     }
   }
 
@@ -84,6 +93,13 @@ editForm.addEventListener("submit", function (e) {
   localStorage.setItem("contacts", JSON.stringify(contacts));
   renderContacts();
   editModal.classList.add("hidden");
+
+  // Notifikasi berhasil diedit
+  successMessage.textContent = "Kontak berhasil diedit!";
+  successMessage.classList.remove("hidden");
+  setTimeout(() => {
+    successMessage.classList.add("hidden");
+  }, 2000);
 });
 
 cancelEdit.addEventListener("click", function () {
